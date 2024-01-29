@@ -1,0 +1,179 @@
+
+1. Vim modes
+2. Vim motions
+3. Vim editor (regs, buffers, search, scrolling, maps...)
+6. Plugins (Plugin manager...)
+4. File Explorer
+5. Theme
+
+## 0. How to quit vim?
+	q	to quit and it won't work if there are changes
+	w	to save
+	wq	to save and quit
+	q!	to quit and discard changes
+
+## 1. Modes in vim
+	you start by the normal node
+	you press some keys to enter each mode (visual, command, insert)
+	ESC	to back to the normal mode from any mode
+	
+## 2. Motions in Vim
+	### 1. Basic motions
+		j		to move down one line
+		k		to move up one line
+		h		to move to the left one character
+		l		to move to the right one character
+
+	### 2. 2x horizontal motions
+	    w		to move one word forward
+	    b		to move one word backward
+
+	### 3. 3x motions
+	    0		to move to the beginning of the line (after a tab if there is one at the beginning)
+	    $		to move to the end of the line
+	    ^		to place the cursor on the first non-empty (\n) character
+	    g_		to place the cursor on the last non-empty (\n) cursor
+	    gg		to move to the first line of the file
+	    g		to move to the last line of the file
+
+	### 4. 4x vertical motions
+		{		to move one paragraph up
+		} 		to move one paragraph down
+		ctl + u to move half page up (15 lines)
+		ctl + d to move half page down (15 lines)
+		ctl + f to move one page down (29 lines)
+		
+
+	    i		to enter the insert mode from the left side of the cursor
+		I		to enter the insert mode from the start of the line (first no-white space)
+	    a		to enter the insert mode from the right side of the cursor
+	    A		to enter the insert mode from the end of the line (first no-white space)
+	    o		to enter the insert mode after inserting a new line under the current one
+	    O	 	to enter the insert mode after inserting a new line above the current one
+	    cc/S	to enter the insert mode after removing the current line (change the current line)
+	    s		to enter the insert mode after deleting the current character
+		gi		to enter insert mode from the last position
+		gI		to enter insert mode from the start of the line (including white spaces)
+
+	    // KEY BINDINGS
+	    V + NAVIGATION: TO SELECT
+	    D + NAVIGATION: TO DELETE
+	    [X: INT] + NAVIGATION: TO MOVE X AMOUNT
+	    [X: INT] + U: TO UNDO X TIMES
+	    [X: INT] + CTL + R: TO REDO X TIMES 
+	    [X: INT] + V: TO SELECT X WORDS
+	    [X: INT] + P: TO PASTE X TIMES
+	    IN GENERAL I CAN BIND NUMBERS WITH ANY KEYS TO PERFORM ACTIONS
+	    AND BIND ANY KEY WITH NAVIGATION KEYS TO PERFORM MORE ACTIONS
+	    KEY + IW: TO PERFORM ACTIOOS ON A WORD (DIW: DELETE WORD, CIW: CHANGE WORD, YIW: COPY WORD)
+	    KEY + IB|(|): TO PERFORM ACTIONS ON A TEXT INSIDE ()
+		key + ip: to preform actions inside a paragraph (dip delete a paragraph inside \n)
+		key + ap: to perform actions around a paragraph (dap deletes
+	    KEY + I": TO PERFORM ACTIONS ON A TEXT INSIDE ""
+		KEY + A..: TO CONTAIN THE (|"|{ WITH IT
+	    [X: INT] + KEY + IW/IB/I"...: FOR MORE BINDINGS CHOICES
+	    T + CHARACTER: TO JUMP BEFORE THIS CHARACTER IN THE SAME LINE AS THE CURSOR
+	    F + CHARACTER: TO JUMP TO THIS CHARACTER IN THE SAME LINE AS THE CURSOR
+		,/;: TO REPEAT F/T TO GO FORWARD/BACKWARD
+	    T/F + CHARACTER: DO THE SAME AS T/F BUT BACKWARDS
+		,/;: THEY SWITCH ROLES WITH T/F (THEY WORK WITH THE DIRECTION OF THE SEARCH)
+	    D + T/F + CHARACTER: TO DELETE TILL THE CHARACTER
+	    %: TO MOVE TO THE CLOSING/OPENING (/"/{.. (I HAVE THE ABILITY TO BIND THIS WITH D/C/P)
+	    
+	    >>> I HAVE UNLIMITED NUMBER OF BINDINGS POSIBILITIES
+ 	    
+ 
+	    V		TO ENTER THE VISUAL MODE AND SELECTING THE CURRENT LINE
+		Ctl + v : to select vertically
+	    D		TO DELETE THE CURRENT LINE WHEN WE'RE IN THE VISUAL MODE AND FROM THE CURRENT POSITION OF THE MOSE TO THEN END OF THE LINE WHEN WE ARE IN THE NORMAL MODE
+	    DD		TO DELETE THE CURRENT LINE IN THE NORMAL MODE
+	    X		TO DELETE THE CURRENT CHARACTER OR THE SELECTED TEXT
+	    X		TO DELETE THE CHARACTER ON THE LEFT WHEN WE ARE IN THE NORMAL MODE AND THE CURRENT LINE WHEN WE ARE IN THE VISUAL MODE 
+
+
+	    // COPY & PASTE ONLY INSIDE VIM (NOT THE CLIPBOARD)
+	    Y		TO COPY A SELECTED TEXT 
+	    Y		TO COPY THE CURRENT LINE (EVEN IF IT'S NOT SELECTED)
+	    P		TO PASTE A TEXT ON THE RIGHT OF THE CURSOR 
+	    P		TO PASTE A TEXT ON THE LEFT OF THE CURSOR
+		DELETION IS CUTTING: WHEN YOU DELETE SOMETHING YOU ACTUALLY CUTTING IT AND YOU CAN PASTE IT SOMEWHERE
+
+	    // SCROLLING
+	    CTL + Y		TO SCROLL UP
+	    CTL + E 		TO SCROLL DOWN
+	    ZZ			TO PUT THE CURRENT LINE IN THE MIDLE
+	    ZT 			TO PUT THE CURRENT LINE IN THE TOP
+	    ZB			TO PUT THE CURRENT LINE IN THE BOTTOM
+		CTL + D		SCROLL A BIT MORE DOWN
+		CTL + U		SCROLL A BIT MORE UP
+	    
+		// INDENTING
+		>>		TO MOVE THE LINE ONE TAB TO THE RIGHT
+		<<		TO MOVE THE LINE ONE TAB TO THE LEFT
+		==		TO AUTO INDENT BLOCKS INSIDE {} (LIKE AUTOFORMAT)
+		AND THE SAME THING HERE THERE ARE MANY BINDINGS TO GO WITH
+
+		// SEARCHING
+		/WORD THEN PRESS ENTER TO SEARCH AND FIND THE FIRST RESULT IN THE FILE
+		?WORD THEN PRESS ENTER TO SEARCH AND FIND THE LAST RESULT IN THE FILE
+		N	TO GO THE NEXT OCCURRENCE (DOWN FOR / AND UP ?)
+		N	TO GO THE PREVIOUS OCCURRENCE (UP FOR / AND DOWN ?)
+		*	TO SEARCH ALL THE ACCURANCIES OF THE WORD THAT THE CURSOR IS ON (FORWARDS "/")
+		#	TO SEARCH ALL THE ACCURANCIES OF THE WORD THAT THE CURSOR IS ON (BACKWARDS "?")
+
+		// MARKING 
+		M + CHARACTER	TO MARK WITH A CHARACTER
+		' + CHARACTER 	TO MOVE TO A MARK
+
+		// REPLACING
+		:%S/WORD/NEWWORD/G	TO MODIFY THE WORD IN THE WHOLE FILE
+		:S/WORD/NEWWORD/G	TO MODIFY THE WORD IN A SELECTED AREA
+			AFTER MAKING THIS IF YOU WANT TO MAKE TO RUN THE LAST SUBSTITUTION ON THE WHOLE FILE THERE IS NO NEED TO REWRITE THE COMMAND AND ADD % AT THE BEGINNING JUST PRES G&
+
+		.		TO REPEAT THE LAST ACTION (THE ACTION IS STORED SOME WHERE TO USE IT LATER, DW I DELETED A WORD "....." TO DELETE THE NEXT FIVE WORDS)
+
+		// REGISTERS 
+		I CAN READ (PASTE) FROM AND WRITE (COPY) TO REGISTERS IN VIM
+		REGSHORTCUT + COPY/PASTE COMMANDS
+		REGISTERS ARE STORED WHEN CLOSING THE INSTANCE
+		SOME REGISTERS ARE ACCESSIBLE ACROSS OTHER INSTANCES OF NVIM AND OTHERS NOT
+
+		// MACROS 
+		Q[MACRONAME] TO START RECORDING A MACRO 
+		DO SOME KEY BINDINGS (SEQUENCE OF ACTIONS)
+		Q TO STOP RECODING 
+		GO THE CHARACTER THAT YOU WANT TO START THE MACRO FROM
+		PRESS @[MACRONAME]
+		NOTES: 
+			THE MACRONAME IS A SINGLE CHARACTER A, B, C..
+			THE MACRO IS JUST A REGISTER
+			THE MACRO IS ACCESSIBLE ACRESS OTHER NVIM INSTANCES
+			THE MACRO IS STORED WHEN CLOSING THE INSTANCE (BECAUSE IT'S A REGISTER)
+
+		// ONE LONG LINE
+		ONE BIG TEXT IS TREATED AS ONE LINE IN VIM, SO IF I WANT TO DEAL WITH IT AS MULTIPLE LINE I PREFIX NAVIGATION KEYS WITH G
+		GJ/GK/G0/G^/G$/...
+		GQQ		: TO DEVIDE ONE LINE TO MULTIPLE LINES
+		GJ		: JOIN LINES WITHOUT SPACES
+
+		// CAPITALIZATION
+		GU		: TO CAPITALIZE
+		GU		: TO UNCAPITALIZE
+		GUU		: TO CAPITALIZE THE WHOLE LINE
+		GUU		: TO CAPITALIZE THE WHOLE LINE
+		~		: SWITCH THE CAPITALIZATION
+		G~~		: TO WORK ON THE WHOLE LINE
+			>> BIND THESE TWO WITH ANYTHING
+
+		// inc/dec
+		Ctl + a: increment the selected incrementables by one
+		g + Ctl + a: incerement the selected incrementables, but add to the first one 1 and the second one 2 etc
+
+		// GOLDEN RULE (BETA)
+		COMMAND COUNT MOTION || COUNT ACTION
+		ACTION: HAS AN EFFECT IMADIATELY ON THE CURRENT CHAR/LINE
+		COMMAND: NEEDS A MOTION
+
+		// Info about the current file
+		Ctrl + g: Show information about the file and the cursor position
+
